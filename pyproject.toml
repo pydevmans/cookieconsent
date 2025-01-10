@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cookieconsent"
+name = "django-cookieconsent"
 version = "0.0.1"
 authors = [
   { name="Manan Bhavsar", email="mananbh9@icloud.com" },
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/pydevmans/cookieconsent"
-Issues = "https://github.com/pydevmans/cookieconsent/issues"
+Homepage = "https://github.com/pydevmans/django-cookieconsent"
+Issues = "https://github.com/pydevmans/django-cookieconsent/issues"

@@ -1,4 +1,4 @@
-# cookieconsent
+# django-cookieconsent
 
 ### A deterministic package allowing user consent implication for setting cookie on django project
 
@@ -81,17 +81,17 @@ In contrast, the `category` field contains values that will be stored in the bro
 
 ### Using in project
 
-1. To install this package, execute the command `pip install cookieconsent`.
+1. To install this package, execute the command `pip install django_cookieconsent`.
 
 2. Insert the cookie notification defining object `COOKIECONSENT` into `<root-app>/settings.py` as previously indicated.
 
-3. Add `cookieconsent.context.cookieconsent_context` in `TEMPLATES["OPTIONS"]["context_processors"]`.
+3. Add `django_cookieconsent.cookieconsent_context` in `TEMPLATES["OPTIONS"]["context_processors"]`.
 
 4. In the views where it is necessary to set a cookie, utilize the following snippet.
 
 ```py
-from cookieconsent import cookie_if_consent_or_action
-resp = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category, *args, **kwargs)
+from django_cookieconsent import cookie_if_consent_or_action
+resp = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category, cookie_value, *args, **kwargs)
 if resp:
     return resp
 ```
