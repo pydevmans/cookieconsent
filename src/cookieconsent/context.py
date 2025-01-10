@@ -39,25 +39,25 @@ def cookieconsent_context(request: HttpRequest):
 
 
 def cookie_if_consent_or_action(
-    request: HttpRequest, response: HttpResponse, category, *args, **kwargs
+    request: HttpRequest, response: HttpResponse, category, cookie_value: str, *args, **kwargs
 ):
     """
-    This function helps making sure if the user allowed for particular kind of
-    cookie to be stored on their machine. For Cookie kwargs passed are same as
-    providedd by `HttpResponse.set_cookie`.
+    This function helps making sure if the user has permitted particular kind of
+    cookie to be stored on their machine. For Cookie, kwargs can be passed as
+    provided by `HttpResponse.set_cookie` by Django.
         Args:
-        request (_type_):
-        response (HttpResponse):
-        category : same as defined in setting.COOKIECONSENT["options"]
-        *args:
-        **kwargs:
+        request (_type_): to flash message,
+        response (HttpResponse): to set cookie,
+        category : same as defined in setting.COOKIECONSENT["options"],
+        *args: positional arguments,
+        **kwargs: keyword arguments
 
     Returns:
         _type_: HttpResponse | None
     """
     userconsent = request.COOKIES.get("userconsent", None)
     if str(category) in str(userconsent):
-        response.set_cookie(*args, **kwargs)
+        response.set_cookie(cookie_value, *args, **kwargs)
         return response
     else:
         for item in settings.COOKIECONSENT["options"]:

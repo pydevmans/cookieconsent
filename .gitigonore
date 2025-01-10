@@ -1,2 +1,4 @@
 */__pycache__
 venv
+dist
+src/cookieconsent.egg-info
