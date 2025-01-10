@@ -1,6 +1,6 @@
-# django-cookieconsent
+# django-cookie-consent-compliance
 
-### A deterministic package allowing user consent implication for setting cookie on django project
+### A deterministic package allowing user consent implication for monitoring cookie on django project
 
 ### Usability
 This package facilitates compliance with the new privacy policy by requiring the disclosure of all cookies stored on the user's device, thereby empowering users to opt-in or opt-out of specific types of cookies. Additionally, it enables site owners to respond appropriately to the preferences expressed by their clients. 
@@ -81,24 +81,13 @@ In contrast, the `category` field contains values that will be stored in the bro
 
 ### Using in project
 
-1. To install this package, execute the command `pip install django_cookieconsent`.
+1. To install this package, execute the command `pip install django-cookie-consent-compliance==0.0.1`.
 
 2. Insert the cookie notification defining object `COOKIECONSENT` into `<root-app>/settings.py` as previously indicated.
 
-3. Add `django_cookieconsent.cookieconsent_context` in `TEMPLATES["OPTIONS"]["context_processors"]`.
+    - Add `cookieconsent.cookieconsent_context` in `TEMPLATES["OPTIONS"]["context_processors"]`.
 
-4. In the views where it is necessary to set a cookie, utilize the following snippet.
-
-```py
-from django_cookieconsent import cookie_if_consent_or_action
-resp = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category, cookie_value, *args, **kwargs)
-if resp:
-    return resp
-```
-
-`cookie_if_consent_or_action` function utilizes Django's `HttpResponse.set_cookie` method, allowing for the inclusion of all valid `kwargs`.
-
-5. Add following template in `base.html`. id and classes can be added/updated as per neccesity.
+3. Add following template in `base.html`. `id` and `class` of element can be added/updated as per necessity.
 
 ```html
    {% if not request.COOKIES.userconsent %}
@@ -140,5 +129,15 @@ if resp:
     {% endif %}
 ```
 
+4. In the `views.py` where it is necessary to set a cookie, utilize as following:
+
+```py
+from cookieconsent import cookie_if_consent_or_action
+resp = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category, cookie_value, *args, **kwargs)
+if resp:
+    return resp
+```
+
+`cookie_if_consent_or_action` function utilizes Django's `HttpResponse.set_cookie` method, allowing for the inclusion of all valid `kwargs`.
 
 [Sample Live Project](https://py2s.pythonanywhere.com/)
