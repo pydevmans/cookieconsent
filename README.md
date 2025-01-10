@@ -81,7 +81,7 @@ In contrast, the `category` field contains values that will be stored in the bro
 
 ### Using in project
 
-1. To install this package, execute the command `pip install django-cookie-consent-compliance==0.0.1`.
+1. To install this package, execute the command `pip install django-cookie-consent-compliance`.
 
 2. Insert the cookie notification defining object `COOKIECONSENT` into `<root-app>/settings.py` as previously indicated.
 
