@@ -133,10 +133,12 @@ In contrast, the `category` field contains values that will be stored in the bro
 
 ```py
 from cookieconsent import cookie_if_consent_or_action
-resp = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category, cookie_value, *args, **kwargs)
-if resp:
-    return resp
+response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category1, "lang", value="en")
+response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category2, "theme", value="auto")
+return response
 ```
+
+If all types of cookies are utilized in a view, last `redirect_path` with cumulative `redirection_message`.
 
 `cookie_if_consent_or_action` function utilizes Django's `HttpResponse.set_cookie` method, allowing for the inclusion of all valid `kwargs`.
 

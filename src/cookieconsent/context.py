@@ -39,12 +39,13 @@ def cookieconsent_context(request: HttpRequest):
 
 
 def cookie_if_consent_or_action(
-    request: HttpRequest, response: HttpResponse, category, cookie_value: str, *args, **kwargs
+    request: HttpRequest, response: HttpResponse, category, *args, **kwargs
 ):
     """
     This function helps making sure if the user has permitted particular kind of
     cookie to be stored on their machine. For Cookie, kwargs can be passed as
-    provided by `HttpResponse.set_cookie` by Django.
+    provided by `HttpResponse.set_cookie` by Django at link 
+    https://docs.djangoproject.com/en/5.1/ref/request-response/#django.http.HttpResponse.set_cookie.
         Args:
         request (_type_): to flash message,
         response (HttpResponse): to set cookie,
@@ -53,11 +54,11 @@ def cookie_if_consent_or_action(
         **kwargs: keyword arguments
 
     Returns:
-        _type_: HttpResponse | None
+        _type_: HttpResponse
     """
     userconsent = request.COOKIES.get("userconsent", None)
     if str(category) in str(userconsent):
-        response.set_cookie(cookie_value, *args, **kwargs)
+        response.set_cookie(*args, **kwargs)
         return response
     else:
         for item in settings.COOKIECONSENT["options"]:
@@ -66,7 +67,7 @@ def cookie_if_consent_or_action(
                     messages.info(request, item["redirection_message"])
                     return redirect(item["redirect_path"])
                 elif item["if_declined"] == "continue":
-                    pass
+                    return response
                 elif item["if_declined"] == "request":
                     messages.info(request, item["redirection_message"])
                     return redirect(item["redirect_path"])
