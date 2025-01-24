@@ -1,13 +1,20 @@
 # django-cookie-consent-compliance
 
-### A deterministic package allowing user consent implication for monitoring cookie on django project
+## A deterministic package allowing user consent implication for monitoring cookie on django project
 
-### Usability
+### Index
+
+- [Usability](#usability)
+- [Configuration](#configuration)
+- [Using in Project](#using-in-project)
+
+
+## <a name="usability"></a>Usability
 This package facilitates compliance with the new privacy policy by requiring the disclosure of all cookies stored on the user's device, thereby empowering users to opt-in or opt-out of specific types of cookies. Additionally, it enables site owners to respond appropriately to the preferences expressed by their clients. 
 
 The implementation process is straightforward, as detailed in the documentation provided below.
 
-### Configuration
+## <a name="configuration"></a>Configuration
 
 Initially, it is essential to establish the `COOKIECONSENT` option within the `[root_app]/settings.py` file of the project.
 
@@ -68,6 +75,7 @@ COOKIECONSENT = {
 }
 ```
 
+
 The `type` and `description` fields provide a general overview to inform the client of their intended function.
 
 In contrast, the `category` field contains values that will be stored in the browser's cookie as `userconsent=<category1>,<category2>`, with the `str(category)` values concatenated by a comma (`,`). It is crucial to ensure that any object passed returns a *valid* `str` containing letters and numbers only (no meta characters).
@@ -79,15 +87,16 @@ In contrast, the `category` field contains values that will be stored in the bro
 
     - `request`: With this option, the request will be redirected to `redirect_path`, and a `redirection_message` will be shown.
 
-### Using in project
+## <a name="using-in-project"></a>Using in project
 
-1. To install this package, execute the command `pip install django-cookie-consent-compliance`.
+### 1. To install this package, execute the command `pip install django-cookie-consent-compliance`.
 
-2. Insert the cookie notification defining object `COOKIECONSENT` into `<root-app>/settings.py` as previously indicated.
+
+### 2. Insert the cookie notification defining object `COOKIECONSENT` into `<root-app>/settings.py` as previously indicated.
 
     - Add `cookieconsent.cookieconsent_context` in `TEMPLATES["OPTIONS"]["context_processors"]`.
 
-3. Add following template in `base.html`. `id` and `class` of element can be added/updated as per necessity.
+### 3. Add following template in `base.html`. `id` and `class` of element can be added/updated as per necessity.
 
 ```html
    {% if not request.COOKIES.userconsent %}
@@ -129,13 +138,14 @@ In contrast, the `category` field contains values that will be stored in the bro
     {% endif %}
 ```
 
-4. In the `views.py` where it is necessary to set a cookie, utilize as following:
+### 4. In the `views.py` where it is necessary to set a cookie, utilize as following:
 
 ```py
 from cookieconsent import cookie_if_consent_or_action
-response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category1, "lang", value="en")
-response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category2, "theme", value="auto")
-return response
+def view_function(request):
+    response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category1, "lang", value="en")
+    response = cookie_if_consent_or_action(request:HttpRequest, response: HttpResponse, category2, "theme", value="auto")
+    return response
 ```
 
 If all types of cookies are utilized in a view, last `redirect_path` with cumulative `redirection_message`.

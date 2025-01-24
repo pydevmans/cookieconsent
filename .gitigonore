@@ -2,3 +2,4 @@
 venv
 dist
 src/cookieconsent.egg-info
+publish_to_pypi.sh
