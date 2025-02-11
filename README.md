@@ -80,7 +80,7 @@ The `type` and `description` fields provide a general overview to inform the cli
 
 In contrast, the `category` field contains values that will be stored in the browser's cookie as `userconsent=<category1>,<category2>`, with the `str(category)` values concatenated by a comma (`,`). It is crucial to ensure that any object passed returns a *valid* `str` containing letters and numbers only (no meta characters).
 
-+ The `if_declined` field can take on three potential values: `abort`, `continue`, and `request`. This functionality enables the developer to respond based on the user's decision regarding the acceptance of specific types of cookies.
++ The `if_declined` field can take on three potential values: `abort`, `continue`, and `request`. This functionality enables the developer to respond based on the user's decision regarding the acceptance of specific types of cookies. `redirect_path` can be used to perform any required operation that are suitable for particular if_declined directive.
     - `abort`: If the client opts out of this type of cookie, a `redirection_message` will be displayed, and the request will be redirected to `redirect_path`.
 
     - `continue`: This directive allows the request to proceed as if everything is in order.

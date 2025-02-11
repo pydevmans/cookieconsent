@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-cookie-consent-compliance"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
-  { name="pydevmans", email="mananbh9@live.com" },
+  { name="pydevmans", email="samirs247@icloud.com" },
 ]
 description = "A deterministic package allowing user consent implication for setting cookie on django projects"
 readme = "README.md"
@@ -15,6 +15,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+    "build>=1.2.2.post1",
 ]
 
 [project.urls]

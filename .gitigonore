@@ -1,5 +1,0 @@
-*/__pycache__
-venv
-dist
-src/cookieconsent.egg-info
-publish_to_pypi.sh
